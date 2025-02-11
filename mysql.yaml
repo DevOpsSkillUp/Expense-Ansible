@@ -1,0 +1,8 @@
+- name: Mysql
+  hosts: mysql
+  become: yes
+  tasks:
+  - name: Install MySql
+    ansible.builtin.package:       # here we ca use dnf/yum/apt but we are using ansible.builtin.package will fetch automatically based on the OS. In real time we can use dnf directly Mostly OS is specific.
+      name: mysql-server
+      state: present
