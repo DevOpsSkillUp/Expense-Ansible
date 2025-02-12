@@ -24,6 +24,7 @@
       login_password: ExpenseApp@1             # login password
       login_host: mysql.devops-project.site    # this is record in route 53 for mysql server with private IP
     register: mysql_data                       # store the output in mysql_data
+    ignore_errors: true                        # ignore the errors if any failure
 
   - name: Checking the mysql info
     ansible.builtin.debug:
