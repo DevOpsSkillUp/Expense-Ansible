@@ -18,7 +18,7 @@
       login_user: root
       login_password: ExpenseApp@1
       login_host: mysql.devops-project.site    #this is record in route 53 for mysql server with private IP
-    resgister: mysql_data
+    register: mysql_data
 
   - name: Checking the mysql info
     ansible.builtin.debug:
