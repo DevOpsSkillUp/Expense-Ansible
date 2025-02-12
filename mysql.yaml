@@ -4,8 +4,11 @@
   tasks:
   - name: Install Mysql Library
     ansible.builtin.pip:     # pip is a package manager for python
-      name: PyMySQL          # A MySQL module is required: for Python 2.7 either PyMySQL, or MySQL-python
+      name: "{{item}}"          # A MySQL module is required: for Python 2.7 either PyMySQL, or MySQL-python
       executable: pip3.9     # pip3.9 is the executable file for pip
+    loop:                    # loop is used to run the same task multiple times
+      - PyMySQL
+      - cryptography
 
   - name: Install MySql
     ansible.builtin.package:   # here we ca use dnf/yum/apt but we are using ansible.builtin.package will fetch automatically based on the OS. In real time we can use dnf directly Mostly OS is specific.
