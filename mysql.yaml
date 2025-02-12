@@ -8,7 +8,7 @@
       executable: pip3.9     # pip3.9 is the executable file for pip
     loop:                    # loop is used to run the same task multiple times
       - PyMySQL
-      - cryptography
+      - cryptography           # cryptography is a library for secure communication between two parties over the internet (Exception message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods)
 
   - name: Install MySql
     ansible.builtin.package:   # here we ca use dnf/yum/apt but we are using ansible.builtin.package will fetch automatically based on the OS. In real time we can use dnf directly Mostly OS is specific.
