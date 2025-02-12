@@ -29,3 +29,7 @@
   - name: Checking the mysql info
     ansible.builtin.debug:
       msg: "Mysql Info{{ mysql_data }}"        # print the mysql info
+  
+  - name: Set the root password
+    ansible.builtin.command:                   # command module is used to run the command
+    when: mysql_info.failed is true            # when mysql_info is failed
