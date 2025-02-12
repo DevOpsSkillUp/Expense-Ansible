@@ -6,17 +6,17 @@
     ansible.builtin.package:       # here we ca use dnf/yum/apt but we are using ansible.builtin.package will fetch automatically based on the OS. In real time we can use dnf directly Mostly OS is specific.
       name: mysql-server
       state: present
-  - name: Starte and enable the service
+  - name: Start and enable the service
     ansible.builtin.service:
       name: mysqld
       state: started
       enabled: yes
-  - name: Connect to mysql server
-    community.mysql.mysql_db:
-      name: root
+  - name: Connect to mysql server   # create a record in route 53 for mysql server with private IP
+    community.mysql.mysql_info:
       login_user: root
-      login_password: ''
-      login_host: localhost
-      login_port: 3306
-      state: present
-      password: root
+      login_password: ExpenseApp@1
+      login_host: mysql.devops-project.site    #this is record in route 53 for mysql server with private IP
+    resgister: mysql_info
+  - name: Checking the mysql info
+    ansible.builtin.debug:
+      msg: "Mysql Info{{ mysql_info }}"
