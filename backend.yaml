@@ -15,13 +15,14 @@
     loop:
       - nodejs
       - mysql
+    
   - name: Install the pip package
-    ansible.builtin.package:
-      name: "{{item}}"
-      executable: pip3.9
-    loop:
+    ansible.builtin.pip:     
+      name: "{{item}}"          
+      executable: pip3.9     
+    loop:                    
       - PyMySQL
-      - cryptography
+      - cryptography   
 
   - name: Creating a user
     ansible.builtin.user:
