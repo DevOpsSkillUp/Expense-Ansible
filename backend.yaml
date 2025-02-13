@@ -15,7 +15,10 @@
     loop:
       - nodejs
       - mysql
-      - PyMySQL
+  - name: Install the pip package
+    ansible.builtin.package:
+      name: pymysql
+      executable: pip3.9
 
   - name: Creating a user
     ansible.builtin.user:
