@@ -3,7 +3,7 @@
   become: yes
   tasks:
   - name: Disable the package
-    ansible.builtin.command: dnf module disable nodejs -y
+    ansible.builtin.command: dnf module disable nodejs -y    # Not idempotent every time it will changing the state to yellow color in the playbook
   
   - name: enable nodejs 20
     ansible.builtin.command: dnf module enable nodejs:20 -y
@@ -36,13 +36,13 @@
       dest: /app
       remote_src: yes
 
-  - name: Install the npm packages
+  - name: Install the dependencies
     community.general.npm:
       path: /app
 
   - name: Copy the backend service
     ansible.builtin.copy:
-      src: expense-backend.service
+      src: backend.service
       dest: /etc/systemd/system/expense-backend.service
 
   - name: import the mysql schema
