@@ -6,11 +6,13 @@
     ansible.builtin.package:    
       name: nginx
       state: present
+  
   - name: start and enable the nginx server
     ansible.builtin.service:
       name: nginx
       state: started
       enabled: yes
+  
   - name: delete the html files
     ansible.builtin.file:
       #path: rm -rf /usr/share/nginx/html/*
@@ -32,9 +34,10 @@
       src: /tmp/frontend.zip
       dest: /usr/share/nginx/html
       remote_src: yes
+  
   - name: copy the expense config
     ansible.builtin.copy:
-      src: /tmp/expense.conf
+      src: expense.conf
       dest: /etc/nginx/default.d/expense.conf
 
   - name: Restart the nginx server
