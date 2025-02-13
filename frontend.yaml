@@ -3,28 +3,41 @@
   become: yes
   tasks:
   - name: install the nginx server
-    ansible.builtin.package:
+    ansible.builtin.package:    
       name: nginx
       state: present
-  - name: start the nginx server
+  - name: start and enable the nginx server
     ansible.builtin.service:
       name: nginx
       state: started
       enabled: yes
-  - name: remove the default content of the nginx server
+  - name: delete the html files
     ansible.builtin.file:
-      path: rm -rf /usr/share/nginx/html/*
+      #path: rm -rf /usr/share/nginx/html/*
+      path: /usr/share/nginx/html/*
       state: directory
+  
+  - name: create the html directory
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: directorys
 
-  - name: Download the file
+  - name: Download the frontend code file
     ansible.builtin.get_url:
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
       dest: /tmp/frontend.zip
-  - name: Change the directory
-    ansible.builtin.command: cd /usr/share/nginx/html
   
-  - name: Unzip the file
+  - name: Unzip the frontend code
     ansible.builtin.unarchive:
       src: /tmp/frontend.zip
       dest: /usr/share/nginx/html
       remote_src: yes
+  - name: copy the expense config
+    ansible.builtin.copy:
+      src: /tmp/expense.conf
+      dest: /etc/nginx/default.d/expense.conf
+
+  - name: Restart the nginx server
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
