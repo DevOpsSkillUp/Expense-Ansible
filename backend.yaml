@@ -44,3 +44,12 @@
     ansible.builtin.copy:
       src: expense-backend.service
       dest: /etc/systemd/system/expense-backend.service
+
+  - name: import the mysql schema
+    ansible.builtin.mysql_db:
+      name: all
+      state: import
+      login_host: mysql.devops-project.site 
+      login_user: root
+      login_password: ExpensApp@123
+      target: /app/schema/expense.sql
