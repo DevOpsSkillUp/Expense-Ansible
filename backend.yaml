@@ -17,10 +17,10 @@
       - mysql
     
   - name: Install the pip package
-    ansible.builtin.pip:     
-      name: "{{item}}"          
-      executable: pip3.9     
-    loop:                    
+    ansible.builtin.pip:     # pip is a package manager for python
+      name: "{{item}}"          # A MySQL module is required: for Python 2.7 either PyMySQL, or MySQL-python
+      executable: pip3.9     # pip3.9 is the executable file for pip
+    loop:                    # loop is used to run the same task multiple times
       - PyMySQL
       - cryptography   
 
@@ -61,3 +61,10 @@
       login_user: root
       login_password: ExpensApp@123
       target: /app/schema/expense.sql
+
+  - name: Daemon reload and restart the service
+    ansible.builtin.systemd:
+      name: backend
+      state: restarted
+      daemon_reload: yes
+      enabled: yes     # true/yes
