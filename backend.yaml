@@ -43,7 +43,7 @@
   - name: Copy the backend service
     ansible.builtin.copy:
       src: backend.service
-      dest: /etc/systemd/system/expense-backend.service
+      dest: /etc/systemd/system/backend.service
       
   - name: Install the pip package
     ansible.builtin.pip:     # pip is a package manager for python
@@ -59,7 +59,7 @@
       login_host: mysql.devops-project.site 
       login_user: root
       login_password: ExpenseApp@1
-      target: /app/schema/expense.sql
+      target: /app/schema/backend.sql
 
   - name: Daemon reload and restart the service
     ansible.builtin.systemd_service:
