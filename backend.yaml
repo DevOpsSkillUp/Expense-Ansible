@@ -59,7 +59,7 @@
       state: import
       login_host: mysql.devops-project.site 
       login_user: root
-      login_password: ExpensApp@123
+      login_password: ExpenseApp@1
       target: /app/schema/expense.sql
 
   - name: Daemon reload and restart the service
